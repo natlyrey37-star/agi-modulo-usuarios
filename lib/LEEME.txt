@@ -1,0 +1,8 @@
+Coloque en esta carpeta el archivo del driver JDBC de MySQL:
+
+    mysql-connector-j-9.x.x.jar
+
+Descarga: https://dev.mysql.com/downloads/connector/j/
+(Operating System: "Platform Independent" -> ZIP Archive)
+
+Descomprima el ZIP y copie solo el archivo .jar aquí.

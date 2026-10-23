@@ -1,0 +1,14 @@
+# Clases compiladas
+bin/
+out/
+*.class
+
+# Configuración local con la clave de MySQL (no se sube)
+config/db.properties
+
+# Driver JDBC: se descarga aparte (ver lib/LEEME.txt)
+lib/*.jar
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
