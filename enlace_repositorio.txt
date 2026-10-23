@@ -4,4 +4,4 @@ Aprendiz: Andrea Nathaly Rey Castiblanco
 Ficha: 3336213
 
 Enlace del repositorio en GitHub:
-https://github.com/________________/agi-modulo-usuarios
+https://github.com/natlyrey37-star/agi-modulo-usuarios.git
