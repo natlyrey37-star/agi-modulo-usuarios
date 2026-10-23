@@ -1,0 +1,7 @@
+Evidencia GA7-220501096-AA2-EV01 - Codificación de módulos del software
+Proyecto: AGI - Asistente Guía Interactivo (módulo de gestión de usuarios)
+Aprendiz: Andrea Nathaly Rey Castiblanco
+Ficha: 3336213
+
+Enlace del repositorio en GitHub:
+https://github.com/________________/agi-modulo-usuarios
