@@ -1,0 +1,299 @@
+/* =============================================================
+   AGI - Asistente Guía Interactivo
+   Estilos del módulo web de gestión de usuarios
+   Paleta del prototipo: #3274f6 azul, #303846 texto, #f3f4f6 fondo
+   ============================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #303846;
+  background-color: #f3f4f6;
+}
+
+a {
+  color: #3274f6;
+}
+
+/* ---------- Encabezado ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.header-marca {
+  font-size: 22px;
+  font-weight: 700;
+  color: #3274f6;
+  text-decoration: none;
+}
+
+.header-usuario {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.header-usuario a {
+  margin-left: 12px;
+  font-weight: 600;
+}
+
+/* ---------- Contenedores ---------- */
+.main-container {
+  max-width: 1080px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.login-container {
+  max-width: 480px;
+  margin: 48px auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.card {
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.titulo-pagina {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.subtitulo {
+  margin: 0 0 24px;
+  color: #6b7280;
+}
+
+/* ---------- Formularios ---------- */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-control {
+  width: 100%;
+  height: 52px;
+  padding: 0 14px;
+  font-size: 18px;
+  font-family: inherit;
+  color: #303846;
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+  background-color: #ffffff;
+}
+
+.form-control:focus {
+  outline: 3px solid rgba(50, 116, 246, 0.35);
+  border-color: #3274f6;
+}
+
+.form-ayuda {
+  margin-top: 4px;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.form-fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+/* ---------- Botones ---------- */
+.login-button,
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 22px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #3274f6;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.login-button {
+  width: 100%;
+}
+
+.boton-secundario {
+  color: #3274f6;
+  background-color: #ffffff;
+  border: 2px solid #3274f6;
+}
+
+.boton-peligro {
+  background-color: #dc2626;
+}
+
+.boton-pequeno {
+  height: 44px;
+  padding: 0 16px;
+  font-size: 16px;
+}
+
+.acciones-formulario {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.link {
+  display: block;
+  margin-top: 18px;
+  text-align: center;
+}
+
+/* ---------- Mensajes ---------- */
+.mensaje {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border-radius: 9px;
+}
+
+.mensaje-exito {
+  color: #166534;
+  background-color: #dcfce7;
+}
+
+.error-message {
+  color: #991b1b;
+  background-color: #fee2e2;
+}
+
+.error-message ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+/* ---------- Barra de búsqueda y tabla ---------- */
+.barra-herramientas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.form-busqueda {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.form-busqueda .form-control {
+  width: 160px;
+}
+
+.tabla-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla-usuarios th {
+  color: #374151;
+  background-color: #f9fafb;
+}
+
+.celda-acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.celda-acciones form {
+  margin: 0;
+}
+
+.tabla-vacia {
+  padding: 24px;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* ---------- Pie de página ---------- */
+.footer {
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 720px) {
+  .form-fila {
+    grid-template-columns: 1fr;
+  }
+
+  .tabla-usuarios thead {
+    display: none;
+  }
+
+  .tabla-usuarios tr {
+    display: block;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #d1d5db;
+  }
+
+  .tabla-usuarios td {
+    display: block;
+    border: none;
+    padding: 4px 10px;
+  }
+}
+
+/* ---------- Formulario de registro / edición ---------- */
+.formulario-container {
+  max-width: 680px;
+  margin: 32px auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.form-busqueda label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #374151;
+}
