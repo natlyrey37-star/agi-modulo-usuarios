@@ -1,0 +1,47 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- =============================================================
+     Fragmento de mensajes: muestra el aviso de éxito o de error.
+     Los códigos llegan en la URL (?ok=... o ?error=...) y se traducen
+     a textos fijos, así nunca se imprime en la página lo que venga en la URL.
+     ============================================================= --%>
+<%!
+    /** Declaración JSP: método disponible en toda la página que incluye el fragmento. */
+    private String textoMensaje(String codigo) {
+        if (codigo == null) {
+            return null;
+        }
+        switch (codigo) {
+            case "registrado":
+                return "La cuenta quedó registrada correctamente.";
+            case "bienvenida":
+                return "Bienvenido(a) a AGI. Inició sesión correctamente.";
+            case "actualizado":
+                return "Los datos se actualizaron correctamente.";
+            case "eliminado":
+                return "El usuario fue eliminado.";
+            case "salida":
+                return "Cerró sesión correctamente.";
+            case "cuentaeliminada":
+                return "Su cuenta fue eliminada.";
+            case "sesion":
+                return "Inicie sesión para continuar.";
+            case "noexiste":
+                return "El usuario no existe o ya fue eliminado.";
+            default:
+                return null;
+        }
+    }
+%>
+<%
+    String textoExito = textoMensaje(request.getParameter("ok"));
+    String textoError = (String) request.getAttribute("error");
+    if (textoError == null) {
+        textoError = textoMensaje(request.getParameter("error"));
+    }
+%>
+<% if (textoExito != null) { %>
+<div class="mensaje mensaje-exito" role="status"><%= textoExito %></div>
+<% } %>
+<% if (textoError != null) { %>
+<div class="mensaje error-message" role="alert"><%= co.edu.sena.agi.util.HtmlUtil.escapar(textoError) %></div>
+<% } %>

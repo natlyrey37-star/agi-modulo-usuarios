@@ -1,0 +1,31 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- =============================================================
+     Fragmento común: inicio del documento HTML y barra superior.
+     Se inserta con la directiva include (inclusión estática), por eso
+     usa la variable tituloPagina que declara la página que lo incluye.
+     ============================================================= --%>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= tituloPagina %> | AGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
+</head>
+<body>
+<header class="header">
+  <a class="header-marca" href="${pageContext.request.contextPath}/">AGI · Asistente Guía Interactivo</a>
+  <%
+      co.edu.sena.agi.modelo.Usuario usuarioSesion =
+              (co.edu.sena.agi.modelo.Usuario) session.getAttribute("usuarioSesion");
+      if (usuarioSesion != null) {
+  %>
+  <span class="header-usuario">
+    Hola, <%= co.edu.sena.agi.util.HtmlUtil.escapar(usuarioSesion.getNombres()) %>
+    <a href="${pageContext.request.contextPath}/usuarios">Usuarios</a>
+    <a href="${pageContext.request.contextPath}/login?accion=salir">Salir</a>
+  </span>
+  <% } %>
+</header>
