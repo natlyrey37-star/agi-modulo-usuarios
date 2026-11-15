@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AGI - Asistente Guía Interactivo
+  Archivo de configuración de Maven: define el framework (Spring Boot),
+  las dependencias del proyecto y la forma de compilarlo y empaquetarlo.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Proyecto padre de Spring Boot: fija versiones compatibles de todas las librerías -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.2</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>co.edu.sena</groupId>
+    <artifactId>agi</artifactId>
+    <version>3.0.0</version>
+    <name>AGI - Asistente Guia Interactivo</name>
+    <description>Módulo de usuarios y guías paso a paso de AGI, construido con Spring Boot</description>
+
+    <properties>
+        <!-- Versión mínima de Java para compilar (funciona también con Java 21 y 25) -->
+        <java.version>17</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- Aplicación web con Spring MVC y servidor Tomcat embebido -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <!-- Motor de plantillas Thymeleaf para las vistas HTML -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- Persistencia: Spring Data JPA con Hibernate -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Validación de formularios con Jakarta Bean Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Cifrado de contraseñas con BCrypt (solo el módulo de criptografía) -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+        <!-- Driver JDBC de MySQL: lo descarga Maven, ya no se copia a mano en lib/ -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Herramientas de pruebas (se usan en la evidencia de pruebas del módulo) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- El empaquetado genera target/agi.jar, que se ejecuta con: java -jar target/agi.jar -->
+        <finalName>agi</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
