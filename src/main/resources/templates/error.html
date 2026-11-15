@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--
+  Página de error. La usa Spring Boot para cualquier error (404, 400, 500)
+  y el ManejadorErroresWeb cuando no existe el registro solicitado.
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza('Error')}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="login-container">
+  <h1 class="titulo-pagina">Algo no salió bien</h1>
+  <p class="codigo-error" th:if="${status != null}" th:text="'Código ' + ${status}">Código 404</p>
+  <div class="mensaje error-message" role="alert"
+       th:text="${mensaje != null} ? ${mensaje} : 'No fue posible completar la solicitud.'">
+    No fue posible completar la solicitud.
+  </div>
+  <a class="login-button" th:href="@{/}">Volver al inicio</a>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>

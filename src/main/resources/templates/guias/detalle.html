@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- Detalle de una guía: lista de pasos en orden y formulario para agregar un paso -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza(${guia.titulo})}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="main-container">
+  <div class="card">
+    <a class="enlace-volver" th:href="@{/guias}">← Volver a las guías</a>
+    <h1 class="titulo-pagina" th:text="${guia.titulo}">Título de la guía</h1>
+    <p class="subtitulo">
+      <span class="etiqueta-categoria" th:text="${#strings.capitalize(guia.categoria.nombreCategoria)}">Categoría</span>
+      <span th:text="${guia.descripcion}">Descripción de la guía.</span>
+    </p>
+
+    <th:block th:replace="~{fragmentos/base :: mensajes}"></th:block>
+
+    <div class="acciones-formulario">
+      <a class="boton boton-secundario" th:href="@{/guias/{id}/editar(id=${guia.idGuia})}">Editar guía</a>
+      <a class="boton boton-secundario" th:href="@{/app/index.html}">Ver en la app móvil</a>
+    </div>
+
+    <h2 class="subtitulo-seccion">Pasos de la guía</h2>
+    <p class="tabla-vacia" th:if="${#lists.isEmpty(guia.pasos)}">Esta guía todavía no tiene pasos.</p>
+
+    <ol class="lista-pasos" th:unless="${#lists.isEmpty(guia.pasos)}">
+      <li class="paso-item" th:each="paso : ${guia.pasos}">
+        <span class="paso-numero" th:text="${paso.numeroPaso}">1</span>
+        <div class="paso-contenido">
+          <strong th:text="${paso.tituloPaso}">Título del paso</strong>
+          <p th:text="${paso.instruccion}">Instrucción del paso.</p>
+        </div>
+        <div class="celda-acciones">
+          <a class="boton boton-secundario boton-pequeno"
+             th:href="@{/guias/{idGuia}/pasos/{idPaso}/editar(idGuia=${guia.idGuia},idPaso=${paso.idPaso})}">Editar</a>
+          <form method="post"
+                th:action="@{/guias/{idGuia}/pasos/{idPaso}/eliminar(idGuia=${guia.idGuia},idPaso=${paso.idPaso})}"
+                onsubmit="return confirm('¿Seguro que desea eliminar este paso?');">
+            <button class="boton boton-peligro boton-pequeno" type="submit">Eliminar</button>
+          </form>
+        </div>
+      </li>
+    </ol>
+
+    <!-- Formulario para agregar un paso a esta guía -->
+    <h2 class="subtitulo-seccion">Agregar un paso</h2>
+    <form class="form-paso" method="post" novalidate
+          th:action="@{/guias/{id}/pasos(id=${guia.idGuia})}" th:object="${pasoFormulario}">
+
+      <div class="mensaje error-message" role="alert" th:if="${#fields.hasAnyErrors()}">
+        Revise los datos del paso marcados en rojo.
+      </div>
+
+      <div class="form-fila form-fila-paso">
+        <div class="form-group">
+          <label for="numeroPaso">Número</label>
+          <input class="form-control" type="number" th:field="*{numeroPaso}" min="1" max="50"
+                 th:errorclass="campo-error">
+          <p class="error-campo" th:if="${#fields.hasErrors('numeroPaso')}" th:errors="*{numeroPaso}"></p>
+        </div>
+        <div class="form-group">
+          <label for="tituloPaso">Título del paso</label>
+          <input class="form-control" type="text" th:field="*{tituloPaso}" maxlength="100"
+                 th:errorclass="campo-error">
+          <p class="error-campo" th:if="${#fields.hasErrors('tituloPaso')}" th:errors="*{tituloPaso}"></p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="instruccion">Instrucción</label>
+        <textarea class="form-control area-texto" th:field="*{instruccion}" maxlength="255" rows="3"
+                  th:errorclass="campo-error"></textarea>
+        <p class="error-campo" th:if="${#fields.hasErrors('instruccion')}" th:errors="*{instruccion}"></p>
+      </div>
+      <button class="boton" type="submit">Agregar paso</button>
+    </form>
+  </div>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>

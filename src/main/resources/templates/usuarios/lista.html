@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Listado y búsqueda de usuarios (vista del UsuarioController) -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza('Gestión de usuarios')}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="main-container">
+  <div class="card">
+    <h1 class="titulo-pagina">Gestión de usuarios</h1>
+    <p class="subtitulo">Personas registradas en AGI.</p>
+
+    <th:block th:replace="~{fragmentos/base :: mensajes}"></th:block>
+
+    <div class="barra-herramientas">
+      <!-- Formulario con método GET: el id viaja en la URL (/usuarios?id=...) -->
+      <form class="form-busqueda" method="get" th:action="@{/usuarios}">
+        <div>
+          <label for="id">Buscar por id</label>
+          <input class="form-control" type="number" id="id" name="id" min="1" required
+                 th:value="${busqueda}">
+        </div>
+        <button class="boton" type="submit">Buscar</button>
+        <a class="boton boton-secundario" th:if="${busqueda != null}" th:href="@{/usuarios}">Ver todos</a>
+      </form>
+      <a class="boton" th:href="@{/usuarios/nuevo}">+ Nuevo usuario</a>
+    </div>
+
+    <table class="tabla-datos">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre completo</th>
+          <th>Cédula</th>
+          <th>Correo</th>
+          <th>Nacimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:if="${#lists.isEmpty(usuarios)}">
+          <td class="tabla-vacia" colspan="6">No hay usuarios para mostrar.</td>
+        </tr>
+        <tr th:each="usuario : ${usuarios}">
+          <td th:text="${usuario.idUsuario}">1</td>
+          <td th:text="${usuario.obtenerNombreCompleto()}">Nombre Apellido</td>
+          <td th:text="${usuario.cedula}">1000000000</td>
+          <td th:text="${usuario.correo}">correo@ejemplo.com</td>
+          <td th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}">01/01/1960</td>
+          <td>
+            <div class="celda-acciones">
+              <a class="boton boton-secundario boton-pequeno"
+                 th:href="@{/usuarios/{id}/editar(id=${usuario.idUsuario})}">Editar</a>
+              <!-- Eliminar usa POST porque modifica la base de datos -->
+              <form method="post" th:action="@{/usuarios/{id}/eliminar(id=${usuario.idUsuario})}"
+                    onsubmit="return confirm('¿Seguro que desea eliminar este usuario?');">
+                <button class="boton boton-peligro boton-pequeno" type="submit">Eliminar</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="form-ayuda" th:text="'Total: ' + ${#lists.size(usuarios)} + ' usuario(s).'">Total: 0 usuario(s).</p>
+  </div>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>

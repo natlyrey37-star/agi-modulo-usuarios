@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- Formulario para editar un paso de una guía -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza('Editar paso')}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="formulario-container">
+  <h1 class="titulo-pagina">Editar paso</h1>
+  <p class="subtitulo" th:text="'Guía: ' + ${guia.titulo}">Guía: Título</p>
+
+  <form method="post" novalidate th:object="${pasoFormulario}"
+        th:action="@{/guias/{idGuia}/pasos/{idPaso}(idGuia=${guia.idGuia},idPaso=*{idPaso})}">
+
+    <div class="mensaje error-message" role="alert" th:if="${#fields.hasAnyErrors()}">
+      Revise los datos marcados en rojo.
+    </div>
+
+    <div class="form-fila form-fila-paso">
+      <div class="form-group">
+        <label for="numeroPaso">Número</label>
+        <input class="form-control" type="number" th:field="*{numeroPaso}" min="1" max="50"
+               th:errorclass="campo-error">
+        <p class="error-campo" th:if="${#fields.hasErrors('numeroPaso')}" th:errors="*{numeroPaso}"></p>
+      </div>
+      <div class="form-group">
+        <label for="tituloPaso">Título del paso</label>
+        <input class="form-control" type="text" th:field="*{tituloPaso}" maxlength="100"
+               th:errorclass="campo-error">
+        <p class="error-campo" th:if="${#fields.hasErrors('tituloPaso')}" th:errors="*{tituloPaso}"></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="instruccion">Instrucción</label>
+      <textarea class="form-control area-texto" th:field="*{instruccion}" maxlength="255" rows="4"
+                th:errorclass="campo-error"></textarea>
+      <p class="error-campo" th:if="${#fields.hasErrors('instruccion')}" th:errors="*{instruccion}"></p>
+    </div>
+
+    <div class="acciones-formulario">
+      <button class="boton" type="submit">Guardar cambios</button>
+      <a class="boton boton-secundario" th:href="@{/guias/{id}(id=${guia.idGuia})}">Cancelar</a>
+    </div>
+  </form>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>
