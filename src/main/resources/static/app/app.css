@@ -1,0 +1,215 @@
+/* =============================================================
+   AGI - Cliente móvil
+   Diseño accesible para adultos mayores: texto de 20 px o más,
+   botones de 56 px de alto y colores de alto contraste.
+   ============================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #303846;
+  background-color: #f3f4f6;
+}
+
+/* Contenedor con el ancho de la pantalla de un celular */
+.app-contenedor {
+  max-width: 420px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 20px 32px;
+  background-color: #ffffff;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- Encabezado ---------- */
+.app-encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.app-marca {
+  margin-left: auto;
+  font-size: 24px;
+  font-weight: 700;
+  color: #3274f6;
+}
+
+.boton-volver {
+  padding: 8px 0;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #3274f6;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ---------- Catálogo ---------- */
+.app-saludo {
+  margin: 24px 0 16px;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.filtro-categorias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.boton-categoria {
+  min-height: 48px;
+  padding: 0 18px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #3274f6;
+  background-color: #ffffff;
+  border: 2px solid #3274f6;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.boton-categoria-activa {
+  color: #ffffff;
+  background-color: #3274f6;
+}
+
+.lista-guias {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tarjeta-guia {
+  padding: 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.tarjeta-guia-categoria {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.tarjeta-guia-titulo {
+  margin: 4px 0 8px;
+  font-size: 24px;
+  color: #1f2937;
+}
+
+.tarjeta-guia-descripcion {
+  margin: 0 0 16px;
+  color: #374151;
+}
+
+/* ---------- Botones ---------- */
+.boton-app {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: #3274f6;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.boton-app:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.boton-app-secundario {
+  color: #3274f6;
+  background-color: #ffffff;
+  border: 2px solid #3274f6;
+}
+
+/* ---------- Recorrido de la guía ---------- */
+.guia-titulo {
+  margin: 24px 0 4px;
+  font-size: 26px;
+  color: #1f2937;
+}
+
+.indicador-paso {
+  margin: 0 0 10px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.barra-progreso {
+  height: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  background-color: #e5e7eb;
+  border-radius: 999px;
+}
+
+.barra-progreso-relleno {
+  width: 0;
+  height: 100%;
+  background-color: #3274f6;
+  transition: width 0.3s ease;
+}
+
+.tarjeta-paso {
+  min-height: 220px;
+  margin-bottom: 24px;
+  padding: 24px;
+  background-color: #eff6ff;
+  border-radius: 16px;
+}
+
+.paso-titulo {
+  margin: 0 0 12px;
+  font-size: 26px;
+  color: #1e3a8a;
+}
+
+.paso-instruccion {
+  margin: 0;
+  font-size: 22px;
+}
+
+.navegacion-pasos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* ---------- Mensajes ---------- */
+.mensaje-estado {
+  margin: 20px 0 0;
+  text-align: center;
+  color: #6b7280;
+}
+
+.mensaje-estado-error {
+  padding: 14px;
+  color: #991b1b;
+  background-color: #fee2e2;
+  border-radius: 12px;
+}

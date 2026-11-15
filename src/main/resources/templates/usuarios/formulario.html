@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+  Formulario de usuario. Se usa en tres modos que define el controlador:
+  "registro" (crear cuenta sin sesión), "nuevo" (administración) y "edicion".
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza(${tituloPagina})}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="formulario-container"
+      th:with="esEdicion=${modo == 'edicion'}, esRegistroPublico=${modo == 'registro'}">
+  <h1 class="titulo-pagina" th:text="${tituloPagina}">Crear cuenta</h1>
+  <p class="subtitulo"
+     th:text="${esEdicion} ? 'Modifique los datos y guarde los cambios.' : 'Complete los datos para registrarse en AGI.'">
+    Complete los datos para registrarse en AGI.
+  </p>
+
+  <!-- Formulario con método POST; novalidate deja que Spring valide y muestre los mensajes -->
+  <form method="post" novalidate th:action="@{${accionFormulario}}" th:object="${usuarioFormulario}">
+
+    <div class="mensaje error-message" role="alert" th:if="${#fields.hasAnyErrors()}">
+      Revise los datos marcados en rojo.
+    </div>
+
+    <div class="form-fila">
+      <div class="form-group">
+        <label for="nombres">Nombres</label>
+        <input class="form-control" type="text" th:field="*{nombres}" maxlength="60" th:errorclass="campo-error">
+        <p class="error-campo" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></p>
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input class="form-control" type="text" th:field="*{apellidos}" maxlength="60" th:errorclass="campo-error">
+        <p class="error-campo" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></p>
+      </div>
+    </div>
+
+    <div class="form-fila">
+      <div class="form-group">
+        <label for="cedula">Cédula</label>
+        <input class="form-control" type="text" th:field="*{cedula}" maxlength="15" inputmode="numeric"
+               th:errorclass="campo-error">
+        <p class="error-campo" th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></p>
+      </div>
+      <div class="form-group">
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input class="form-control" type="date" th:field="*{fechaNacimiento}" min="1900-01-01"
+               th:max="${fechaMaxima}" th:errorclass="campo-error">
+        <p class="error-campo" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo electrónico</label>
+      <input class="form-control" type="email" th:field="*{correo}" maxlength="100" th:errorclass="campo-error">
+      <p class="error-campo" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></p>
+    </div>
+
+    <!-- Las contraseñas no usan th:field para no volver a escribirlas en la página -->
+    <div class="form-fila">
+      <div class="form-group">
+        <label for="contrasena" th:text="${esEdicion} ? 'Nueva contraseña (opcional)' : 'Contraseña'">Contraseña</label>
+        <input class="form-control" type="password" id="contrasena" name="contrasena" maxlength="50"
+               autocomplete="new-password" th:classappend="${#fields.hasErrors('contrasena')} ? 'campo-error'">
+        <p class="error-campo" th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"></p>
+      </div>
+      <div class="form-group">
+        <label for="confirmarContrasena">Confirmar contraseña</label>
+        <input class="form-control" type="password" id="confirmarContrasena" name="confirmarContrasena"
+               maxlength="50" autocomplete="new-password"
+               th:classappend="${#fields.hasErrors('confirmarContrasena')} ? 'campo-error'">
+        <p class="error-campo" th:if="${#fields.hasErrors('confirmarContrasena')}" th:errors="*{confirmarContrasena}"></p>
+      </div>
+    </div>
+    <p class="form-ayuda"
+       th:text="${esEdicion} ? 'Deje la contraseña en blanco para conservar la actual.' : 'Mínimo 6 caracteres.'">
+      Mínimo 6 caracteres.
+    </p>
+
+    <div class="acciones-formulario">
+      <button class="boton" type="submit" th:text="${esEdicion} ? 'Guardar cambios' : 'Registrar'">Registrar</button>
+      <a class="boton boton-secundario" th:href="${esRegistroPublico} ? @{/login} : @{/usuarios}">Cancelar</a>
+    </div>
+  </form>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>

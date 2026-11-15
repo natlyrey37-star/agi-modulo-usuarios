@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- Listado de guías con filtro por categoría (vista del GuiaController) -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza('Gestión de guías')}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="main-container">
+  <div class="card">
+    <h1 class="titulo-pagina">Gestión de guías</h1>
+    <p class="subtitulo">Guías paso a paso que se muestran en la aplicación.</p>
+
+    <th:block th:replace="~{fragmentos/base :: mensajes}"></th:block>
+
+    <div class="barra-herramientas">
+      <!-- Filtro por categoría con método GET (/guias?categoria=N) -->
+      <form class="form-busqueda" method="get" th:action="@{/guias}">
+        <div>
+          <label for="categoria">Categoría</label>
+          <select class="form-control" id="categoria" name="categoria">
+            <option value="">Todas</option>
+            <option th:each="categoria : ${categorias}"
+                    th:value="${categoria.idCategoria}"
+                    th:text="${#strings.capitalize(categoria.nombreCategoria)}"
+                    th:selected="${categoria.idCategoria == categoriaSeleccionada}">Categoría</option>
+          </select>
+        </div>
+        <button class="boton" type="submit">Filtrar</button>
+      </form>
+      <a class="boton" th:href="@{/guias/nueva}">+ Nueva guía</a>
+    </div>
+
+    <table class="tabla-datos">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Título</th>
+          <th>Categoría</th>
+          <th>Pasos</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:if="${#lists.isEmpty(guias)}">
+          <td class="tabla-vacia" colspan="5">No hay guías para mostrar.</td>
+        </tr>
+        <tr th:each="guia : ${guias}">
+          <td th:text="${guia.idGuia}">1</td>
+          <td>
+            <strong th:text="${guia.titulo}">Título</strong>
+            <span class="texto-secundario" th:if="${guia.descripcion != null}" th:text="${guia.descripcion}">Descripción</span>
+          </td>
+          <td><span class="etiqueta-categoria" th:text="${#strings.capitalize(guia.categoria.nombreCategoria)}">Categoría</span></td>
+          <td th:text="${#lists.size(guia.pasos)}">0</td>
+          <td>
+            <div class="celda-acciones">
+              <a class="boton boton-pequeno" th:href="@{/guias/{id}(id=${guia.idGuia})}">Pasos</a>
+              <a class="boton boton-secundario boton-pequeno" th:href="@{/guias/{id}/editar(id=${guia.idGuia})}">Editar</a>
+              <form method="post" th:action="@{/guias/{id}/eliminar(id=${guia.idGuia})}"
+                    onsubmit="return confirm('¿Seguro que desea eliminar esta guía y todos sus pasos?');">
+                <button class="boton boton-peligro boton-pequeno" type="submit">Eliminar</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="form-ayuda" th:text="'Total: ' + ${#lists.size(guias)} + ' guía(s).'">Total: 0 guía(s).</p>
+  </div>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>

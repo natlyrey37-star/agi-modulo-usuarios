@@ -1,7 +1,10 @@
-Evidencia GA7-220501096-AA2-EV01 - Codificación de módulos del software
-Proyecto: AGI - Asistente Guía Interactivo (módulo de gestión de usuarios)
+Evidencia GA7-220501096-AA3-EV01 - Codificación de módulos del software stand-alone, web y móvil
+Proyecto: AGI - Asistente Guía Interactivo (módulo de usuarios y guías con Spring Boot)
 Aprendiz: Andrea Nathaly Rey Castiblanco
 Ficha: 3336213
 
 Enlace del repositorio en GitHub:
 https://github.com/natlyrey37-star/agi-modulo-usuarios.git
+
+Rama de trabajo de esta evidencia: feature/spring-boot
+Versión entregada (etiqueta): v3.0-spring

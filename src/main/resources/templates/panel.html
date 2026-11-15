@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- Panel principal: resumen de los registros y accesos a cada módulo -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza('Panel principal')}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="main-container">
+  <div class="card">
+    <h1 class="titulo-pagina">Panel principal</h1>
+    <p class="subtitulo">Resumen de la información guardada en la base de datos agi.</p>
+
+    <th:block th:replace="~{fragmentos/base :: mensajes}"></th:block>
+
+    <section class="tarjetas-resumen">
+      <a class="tarjeta-dato" th:href="@{/usuarios}">
+        <span class="tarjeta-numero" th:text="${totalUsuarios}">0</span>
+        <span class="tarjeta-etiqueta">Usuarios</span>
+      </a>
+      <a class="tarjeta-dato" th:href="@{/guias}">
+        <span class="tarjeta-numero" th:text="${totalGuias}">0</span>
+        <span class="tarjeta-etiqueta">Guías</span>
+      </a>
+      <div class="tarjeta-dato">
+        <span class="tarjeta-numero" th:text="${totalPasos}">0</span>
+        <span class="tarjeta-etiqueta">Pasos</span>
+      </div>
+      <div class="tarjeta-dato">
+        <span class="tarjeta-numero" th:text="${totalCategorias}">0</span>
+        <span class="tarjeta-etiqueta">Categorías</span>
+      </div>
+    </section>
+
+    <div class="acciones-formulario">
+      <a class="boton" th:href="@{/usuarios/nuevo}">+ Nuevo usuario</a>
+      <a class="boton" th:href="@{/guias/nueva}">+ Nueva guía</a>
+      <a class="boton boton-secundario" th:href="@{/app/index.html}">Abrir la app móvil</a>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>

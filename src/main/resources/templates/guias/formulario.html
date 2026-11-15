@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- Formulario para registrar o editar una guía -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza(${tituloPagina})}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="formulario-container">
+  <h1 class="titulo-pagina" th:text="${tituloPagina}">Nueva guía</h1>
+  <p class="subtitulo">Escriba el título, una descripción breve y elija la categoría.</p>
+
+  <form method="post" novalidate th:action="@{${accionFormulario}}" th:object="${guiaFormulario}">
+
+    <div class="mensaje error-message" role="alert" th:if="${#fields.hasAnyErrors()}">
+      Revise los datos marcados en rojo.
+    </div>
+
+    <div class="form-group">
+      <label for="titulo">Título</label>
+      <input class="form-control" type="text" th:field="*{titulo}" maxlength="100" th:errorclass="campo-error">
+      <p class="error-campo" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></p>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción (opcional)</label>
+      <textarea class="form-control area-texto" th:field="*{descripcion}" maxlength="255" rows="3"
+                th:errorclass="campo-error"></textarea>
+      <p class="error-campo" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></p>
+    </div>
+
+    <div class="form-group">
+      <label for="idCategoria">Categoría</label>
+      <select class="form-control" th:field="*{idCategoria}" th:errorclass="campo-error">
+        <option value="">Seleccione una categoría</option>
+        <option th:each="categoria : ${categorias}"
+                th:value="${categoria.idCategoria}"
+                th:text="${#strings.capitalize(categoria.nombreCategoria)}">Categoría</option>
+      </select>
+      <p class="error-campo" th:if="${#fields.hasErrors('idCategoria')}" th:errors="*{idCategoria}"></p>
+    </div>
+
+    <div class="acciones-formulario">
+      <button class="boton" type="submit" th:text="${esEdicion} ? 'Guardar cambios' : 'Registrar guía'">Registrar guía</button>
+      <a class="boton boton-secundario" th:href="@{/guias}">Cancelar</a>
+    </div>
+  </form>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>

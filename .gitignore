@@ -1,17 +1,15 @@
-# Clases compiladas
+# Archivos que genera Maven al compilar
+target/
+
+# Archivos que genera VS Code (extensión de Java) al importar el proyecto
 bin/
-out/
-*.class
+.classpath
+.project
+.settings/
+.factorypath
 
-# Configuracion local con la clave de MySQL (no se sube)
+# Configuración local con la clave de MySQL (no se sube)
 config/db.properties
-
-# Driver JDBC: se descarga aparte (ver lib/LEEME.txt)
-lib/*.jar
-
-# Archivos que genera desplegar.bat para la aplicacion web
-web/WEB-INF/classes/
-web/WEB-INF/lib/
 
 # Archivos del sistema operativo
 .DS_Store

@@ -1,0 +1,5 @@
+# Copie este archivo como config/db.properties y escriba sus datos de MySQL.
+# config/db.properties no se sube a GitHub (está en .gitignore).
+db.url=jdbc:mysql://localhost:3306/agi
+db.usuario=root
+db.clave=ESCRIBA_AQUI_SU_CLAVE

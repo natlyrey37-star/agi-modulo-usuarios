@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+  Fragmentos comunes de las vistas de AGI (reemplazan a encabezado.jspf,
+  mensajes.jspf y pie.jsp de la versión 2.0). Cada página los inserta con th:replace.
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Cabecera del documento: recibe el título de la página -->
+<head th:fragment="cabeza(titulo)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${titulo} + ' | AGI'">AGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+
+<!-- Barra superior: muestra el menú solo cuando hay sesión iniciada -->
+<header class="header" th:fragment="encabezado">
+  <a class="header-marca" th:href="@{/}">AGI · Asistente Guía Interactivo</a>
+  <nav class="header-usuario" th:if="${usuarioSesion != null}">
+    <span>Hola, <strong th:text="${usuarioSesion.nombres}">Nombre</strong></span>
+    <a th:href="@{/panel}">Panel</a>
+    <a th:href="@{/usuarios}">Usuarios</a>
+    <a th:href="@{/guias}">Guías</a>
+    <a th:href="@{/app/index.html}">App móvil</a>
+    <form class="form-salir" method="post" th:action="@{/salir}">
+      <button class="boton-enlace" type="submit">Salir</button>
+    </form>
+  </nav>
+</header>
+
+<!-- Mensajes de éxito o de error que dejan los controladores -->
+<th:block th:fragment="mensajes">
+  <div class="mensaje mensaje-exito" role="status"
+       th:if="${mensajeExito != null}" th:text="${mensajeExito}">Operación exitosa.</div>
+  <div class="mensaje error-message" role="alert"
+       th:if="${mensajeError != null}" th:text="${mensajeError}">Ocurrió un error.</div>
+</th:block>
+
+<!-- Pie de página -->
+<footer class="footer" th:fragment="pie">
+  AGI – Asistente Guía Interactivo · SENA, Análisis y Desarrollo de Software ·
+  <span th:text="${#dates.year(#dates.createNow())}">2026</span>
+</footer>
+
+</body>
+</html>

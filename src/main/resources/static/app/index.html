@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+  AGI - Cliente móvil
+  Pantallas pensadas para el celular del adulto mayor: letra grande, alto
+  contraste y botones amplios. Los datos llegan de la API REST del módulo.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guías paso a paso | AGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="app-contenedor">
+
+    <header class="app-encabezado">
+      <button class="boton-volver" id="boton-volver" type="button" hidden>← Volver</button>
+      <span class="app-marca">AGI</span>
+    </header>
+
+    <!-- Pantalla 1: catálogo de guías -->
+    <main class="pantalla" id="pantalla-catalogo">
+      <h1 class="app-saludo">¿Qué quiere aprender hoy?</h1>
+      <div class="filtro-categorias" id="filtro-categorias" role="group" aria-label="Categorías"></div>
+      <div class="lista-guias" id="lista-guias"></div>
+    </main>
+
+    <!-- Pantalla 2: recorrido de una guía, un paso a la vez -->
+    <main class="pantalla" id="pantalla-guia" hidden>
+      <h1 class="guia-titulo" id="guia-titulo">Título de la guía</h1>
+      <p class="indicador-paso" id="indicador-paso">Paso 1 de 1</p>
+      <div class="barra-progreso" aria-hidden="true">
+        <div class="barra-progreso-relleno" id="barra-progreso"></div>
+      </div>
+
+      <article class="tarjeta-paso">
+        <h2 class="paso-titulo" id="paso-titulo">Título del paso</h2>
+        <p class="paso-instruccion" id="paso-instruccion">Instrucción del paso.</p>
+      </article>
+
+      <div class="navegacion-pasos" id="navegacion-pasos">
+        <button class="boton-app boton-app-secundario" id="boton-anterior" type="button">Anterior</button>
+        <button class="boton-app" id="boton-siguiente" type="button">Siguiente</button>
+      </div>
+      <button class="boton-app" id="boton-terminar" type="button" hidden>Volver a las guías</button>
+    </main>
+
+    <p class="mensaje-estado" id="mensaje-estado" role="status"></p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

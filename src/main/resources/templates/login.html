@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- Pantalla de inicio de sesión de AGI -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/base :: cabeza('Iniciar sesión')}"></head>
+<body>
+<header th:replace="~{fragmentos/base :: encabezado}"></header>
+
+<main class="login-container">
+  <h1 class="titulo-pagina">Iniciar sesión</h1>
+  <p class="subtitulo">Bienvenido a AGI, su asistente para aprender a usar el celular.</p>
+
+  <th:block th:replace="~{fragmentos/base :: mensajes}"></th:block>
+
+  <!-- Avisos que llegan como parámetro en la URL (?sesion, ?salida, ?cuentaEliminada) -->
+  <div class="mensaje error-message" role="alert" th:if="${param.sesion}">Inicie sesión para continuar.</div>
+  <div class="mensaje mensaje-exito" role="status" th:if="${param.salida}">Cerró sesión correctamente.</div>
+  <div class="mensaje mensaje-exito" role="status" th:if="${param.cuentaEliminada}">Su cuenta fue eliminada.</div>
+
+  <!-- Formulario con método POST: la contraseña no viaja en la URL -->
+  <form method="post" th:action="@{/login}">
+    <div class="form-group">
+      <label for="correo">Correo electrónico</label>
+      <input class="form-control" type="email" id="correo" name="correo" maxlength="100"
+             autocomplete="email" th:value="${correoEscrito}">
+    </div>
+    <div class="form-group">
+      <label for="contrasena">Contraseña</label>
+      <input class="form-control" type="password" id="contrasena" name="contrasena" maxlength="50"
+             autocomplete="current-password">
+    </div>
+    <button class="login-button" type="submit">Ingresar</button>
+  </form>
+
+  <a class="link" th:href="@{/registro}">¿No tiene cuenta? Regístrese aquí</a>
+  <a class="link" th:href="@{/app/index.html}">Ver las guías en la app móvil</a>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+</body>
+</html>

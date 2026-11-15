@@ -1,11 +1,12 @@
 -- =============================================================
 -- Proyecto AGI - Asistente Guía Interactivo
--- Script de la base de datos "agi" (MySQL 8.0)
--- Evidencia GA7-220501096-AA2-EV01 - Codificación de módulos del software
+-- Script de la base de datos "agi" (MySQL 8.0) - versión 3.0
+-- Evidencia GA7-220501096-AA3-EV01 - Codificación de módulos del software
 --
 -- Estructura tomada de la evidencia GA6-220501096-AA2-EV02.
--- Ejecutar completo en MySQL Workbench (rayo "Execute") antes
--- de correr el módulo Java.
+-- Ejecutar completo en MySQL Workbench (rayo "Execute") antes de
+-- iniciar la aplicación Spring Boot. ATENCIÓN: borra y vuelve a crear
+-- la base de datos agi con los datos iniciales.
 -- =============================================================
 
 DROP DATABASE IF EXISTS agi;
@@ -100,3 +101,38 @@ INSERT INTO guia (titulo, descripcion, id_categoria) VALUES
   ('Hacer una llamada', 'Aprende a marcar un número y llamar a un contacto.', 1),
   ('Tomar una foto', 'Aprende a abrir la cámara y tomar una fotografía.', 2),
   ('Navegar por internet', 'Aprende a abrir el navegador y buscar información.', 3);
+
+-- Pasos de cada guía (nuevo en la versión 3.0)
+INSERT INTO paso (numero_paso, titulo_paso, instruccion, id_guia) VALUES
+  (1, 'Abra la aplicación Teléfono',
+      'Busque en la pantalla el ícono verde con forma de auricular y tóquelo una vez.', 1),
+  (2, 'Marque el número',
+      'Toque los números del teclado hasta escribir el número completo de la persona a la que quiere llamar.', 1),
+  (3, 'Inicie la llamada',
+      'Toque el botón verde con el auricular. Acerque el celular a su oído y espere a que contesten.', 1),
+  (4, 'Termine la llamada',
+      'Cuando termine de hablar, toque el botón rojo para colgar.', 1),
+
+  (1, 'Abra la cámara',
+      'Busque el ícono con forma de cámara fotográfica y tóquelo una vez.', 2),
+  (2, 'Encuadre la imagen',
+      'Sostenga el celular con las dos manos y apunte hacia lo que quiere fotografiar. Lo verá en la pantalla.', 2),
+  (3, 'Tome la foto',
+      'Toque el botón redondo grande de la parte de abajo. Escuchará un sonido parecido al de una cámara.', 2),
+  (4, 'Revise su foto',
+      'Toque el cuadro pequeño de la esquina inferior para ver la foto que acaba de tomar.', 2),
+
+  (1, 'Abra el navegador',
+      'Toque el ícono del navegador, por ejemplo Chrome, que tiene forma de círculo de colores.', 3),
+  (2, 'Toque la barra de búsqueda',
+      'Toque la barra blanca de la parte de arriba. En la pantalla aparecerá el teclado.', 3),
+  (3, 'Escriba lo que busca',
+      'Escriba con el teclado la palabra o la pregunta que quiere buscar.', 3),
+  (4, 'Abra un resultado',
+      'Toque el botón de buscar del teclado y luego toque el título del resultado que le interese.', 3);
+
+-- Cuenta de administración para el primer inicio de sesión (nuevo en la versión 3.0)
+-- Correo: admin@agi.com   Contraseña: Agi2026*   (guardada con hash BCrypt)
+INSERT INTO usuario (nombres, apellidos, cedula, correo, contrasena, fecha_nacimiento) VALUES
+  ('Administrador', 'AGI', '1000000001', 'admin@agi.com',
+   '$2b$10$451EkyLezk6BVXSwq4u2bOTpd0h2Cd2yO.KRra27iKDcXnukoKXJe', '1990-01-01');
