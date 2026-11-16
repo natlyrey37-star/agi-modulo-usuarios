@@ -11,6 +11,7 @@ Aprendiz: Andrea Nathaly Rey Castiblanco · SENA · Análisis y Desarrollo de So
 | 1.0 | `v1.0-consola` | CRUD de usuarios en consola con JDBC y patrón DAO | GA7-220501096-AA2-EV01 |
 | 2.0 | `v2.0-web` | Aplicación web con servlets, JSP y formularios GET/POST en Tomcat | GA7-220501096-AA2-EV02 |
 | 3.0 | `v3.0-spring` | Spring Boot: web con Thymeleaf, Spring Data JPA, API REST y cliente móvil | GA7-220501096-AA3-EV01 |
+| 3.1 | `v3.1-pruebas` | 58 pruebas automatizadas (JUnit 5, Mockito, MockMvc) y casos de prueba documentados | GA7-220501096-AA3-EV02 |
 
 Las versiones anteriores se conservan en sus etiquetas: `git checkout v2.0-web`.
 
@@ -53,6 +54,8 @@ AGI_Modulo_Usuarios/
         └── static/
             ├── css/estilos.css
             └── app/                cliente móvil (index.html, app.css, app.js)
+src/test/java/co/edu/sena/agi/      pruebas automatizadas (dto, servicio, controlador, api)
+docs/pruebas/casos_de_prueba.md     historias de usuario y casos de prueba ejecutados
 ```
 
 ## Cómo ejecutarlo
@@ -63,6 +66,11 @@ AGI_Modulo_Usuarios/
 4. Abrir `http://localhost:8080/agi/` e ingresar con `admin@agi.com` / `Agi2026*`.
 
 Para generar el ejecutable independiente: `.\mvnw.cmd package` y luego `java -jar target\agi.jar`.
+
+## Pruebas
+
+- Automatizadas: `.\mvnw.cmd test` ejecuta 58 pruebas con JUnit 5, Mockito y MockMvc. No necesitan MySQL: los repositorios se reemplazan por objetos simulados.
+- Funcionales y de validación: 47 casos documentados en `docs/pruebas/casos_de_prueba.md`, con las historias de usuario y sus criterios de aceptación.
 
 ## Rutas de la aplicación web
 
